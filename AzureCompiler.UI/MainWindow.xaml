@@ -1,0 +1,44 @@
+﻿<Window x:Class="AzureCompiler.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AzureCompiler.UI"
+        mc:Ignorable="d"
+        Title="Acumatica Azure packages compiler" Height="295" Width="800">
+    <Grid>
+        <Label Content="Path to Microsoft SDK " HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="155,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="580" Name="TbSDK" MouseDoubleClick="TexBox_Path_MouseDoubleClick" />
+        <Button Content="..." HorizontalAlignment="Left" Margin="740,13,0,0" VerticalAlignment="Top" Width="31" Click="Button_Path_Click" Name="BtSDK" Height="23"/>
+
+        <Label Content="Acumatica Version" HorizontalAlignment="Left" Margin="20,45,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="155,45,0,0" VerticalAlignment="Top" Width="120" x:Name="CbAcumaticaVersion" 
+            ItemsSource="{Binding AcumaticaVersions, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+            SelectedItem="{Binding SelectedAcumatica, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+            DisplayMemberPath="AcumaticaRelease" SelectionChanged="CbAcumaticaVersion_SelectionChanged"/>
+        <Label Content=".NET Version" HorizontalAlignment="Left" Margin="290,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="381,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="TbFramework" IsEnabled="False"/>
+
+        <RadioButton Content="Standard Acumatica config" HorizontalAlignment="Left" Margin="290,81,0,0" VerticalAlignment="Top" Height="18" IsChecked="True"  Name="RbUseStandard" Checked="Config_Checked" />
+        <RadioButton Content="Custom config" HorizontalAlignment="Left" Margin="470,81,0,0" VerticalAlignment="Top" Checked="Config_Checked" Name="RbUseCustom" />
+        <Label Name="LbSize" Content="VM Size" HorizontalAlignment="Left" Margin="20,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
+        <ComboBox HorizontalAlignment="Left" Margin="155,76,0,0" VerticalAlignment="Top" Width="120" Name="CbVmSize" IsTextSearchEnabled="False" IsEditable="True"
+            ItemsSource="{Binding VMSizes, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+            SelectedItem="{Binding SelectedSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" />
+
+        <Label Name="LbCustom" Content="Custom config" HorizontalAlignment="Left" Margin="20,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="155,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="580" Name="TbConfig" 
+                 MouseDoubleClick="TbConfig_MouseDoubleClick" TextChanged="TbConfig_TextChanged" IsEnabled="False"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="740,108,0,0" VerticalAlignment="Top" Width="31" Click="BtConfig_Click" Name="BtConfig" Height="23" IsEnabled="False"/>
+
+        <Label Content="Path to source folder" HorizontalAlignment="Left" Margin="20,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="155,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="580" Name="TbSource" MouseDoubleClick="TexBox_Path_MouseDoubleClick"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="740,143,0,0" VerticalAlignment="Top" Width="31" Click="Button_Path_Click" x:Name="BtSource" Height="23"/>
+
+        <Label Content="Path to output folder" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="155,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="580" Name="TbOutput" MouseDoubleClick="TexBox_Path_MouseDoubleClick"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="740,174,0,0" VerticalAlignment="Top" Width="31" Click="Button_Path_Click" x:Name="BtOutput" Height="23"/>
+
+        <Button Content="Compile" HorizontalAlignment="Left" Margin="696,224,0,0" VerticalAlignment="Top" Width="75" Name="BtnCompile" Click="BtnCompile_Click"/>
+    </Grid>
+</Window>
