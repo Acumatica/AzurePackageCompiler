@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Acumatica Azure packages compiler" Height="295" Width="800">
     <Grid>
-        <Label Content="Path to Microsoft SDK " HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
+        <Label Content="Path to Azure SDK " HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.0,3.0"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="155,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="580" Name="TbSDK" MouseDoubleClick="TexBox_Path_MouseDoubleClick" />
         <Button Content="..." HorizontalAlignment="Left" Margin="740,13,0,0" VerticalAlignment="Top" Width="31" Click="Button_Path_Click" Name="BtSDK" Height="23"/>
 
