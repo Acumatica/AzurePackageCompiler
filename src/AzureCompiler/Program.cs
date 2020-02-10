@@ -19,16 +19,16 @@ namespace AzureCompiler
 
         public class Options
         {
-            [Option('c', "cspack", Required = true, HelpText = "Path to cspack.exe in Microsoft SDK folder")]
+            [Option('c', "cspack", Required = true, HelpText = "Path to azure packaging tool cspack.exe")]
             public string PathToCsPack { get; set; }
 
-            [Option('s', "sourceDir", Required = true, HelpText = "Path to source files of ErpPackage.zip")]
+            [Option('s', "sourceDir", Required = true, HelpText = "Path to source folder, unpacked ErpPackage.zip")]
             public string SourceDir { get; set; }
 
-            [Option('o', "outDir", Required = true, HelpText = "Output path to azure package")]
+            [Option('o', "outDir", Required = true, HelpText = "Path to output folder")]
             public string OutDir { get; set; }
 
-            [Option('f', "framework", Required = true, HelpText = "Framework version. NDP48 - for version 2019R2/2020R1, NDP482 - 2019R1")]
+            [Option('f', "framework", Required = true, HelpText = "Framework version.Avaiable values: NDP48 - for version 2019R2/2020R1, NDP482 - 2019R1")]
             public FrameworkTypes Framework { get; set; }
 
             [Option('v', "vmSize", Required = false, HelpText = "Vitrual machine size. Can be skipped if you use custom config.")]
