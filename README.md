@@ -1,50 +1,53 @@
-# Azure package compiler
+# Azure Package Compiler
 
 ## Solution structure
 
-Program have two versions of application. With UI and console application. You can find them inside solution AzureCompiler.
+The Azure package compiler has a version with UI and a console version. You can find these versions inside the `AzureCompiler` solution.
 
-- AzureCompiler.Console - console application
-- AzureCompiler.UI - UI application
-- AzureCompiler.Core - main algorithm for compilation package.
-- DummySite - site using for pre installation acumatica.
-- PX.Dummy - required for DummySite.
-- PX.Azure - configuration for Acumatica Role in Azure
+The `AzureCompiler` solution has the following structure:
+- `AzureCompiler.Console`: The console application
+- `AzureCompiler.UI`: The application with UI
+- `AzureCompiler.Core`: The main algorithm for compilation of the package
+- `DummySite`: A site that is used for preinstallation of Acumatica ERP
+- `PX.Dummy`: A supplementary project that is required for `DummySite`
+- `PX.Azure`: The configuration for the Acumatica role in Azure
 
-## Before run application
+## Before you run the application
 
-You need to install Azure SDK.
-You can do it Visual Studio installer for version (2017, 2019). Just select it as workload in installation.
-![Selected AzureSDK](/docs/images/install.png "AzureSDK")
+You need to install Azure SDK. To do it, you run Visual Studio Installer (Version 2017 or 2019) and select the check box for **Azure development** on the **Workloads** tab, as shown in the following screenshot.
+![Selected AzureSDK](docs/images/install.png "AzureSDK")
 
 ## AzureCompiler.UI
+The UI of the application is shown in the following screenshot.
 
-![Opened UI application](/docs/images/ui1.png "EmptyUI")
+![Opened UI application](docs/images/ui1.png "EmptyUI")
 
-| Input parameter | Required | Default | Description |
+The UI elements are described in the following table.
+
+| Element | Required | Default | Description |
 | --------------- | -------- | ------- | ----------- |
-| Path to Azure SDK     | Yes | None | Path to azure packaging tool cspack.exe |
-| Acumatica Version     | Yes | Default value "2020R1/2019R2" | Use for prefere which version of NET Framework required install before start Acumatica ERP |
-| VM Size               | Yes, if selected radio button "Standard Acumatica config" | Defaule value - Medium | Define virtual machine size for which will be compiled azure package. If you don't find required size, you can write it in the field. Application will be use standard Acumatica configuration for azure packages |
-| Custom config         | Yes, if selected radio button "Custom config" | None | Define full path to file *.csdef. In this case application didn't use VM Size |
-| Path to source folder | Yes | None | Path to unpacked ErpPackage.zip. It can be downloaded from [builds](http://builds.acumatica.com/) |
-| Path to output folder | Yes | None | Path to directory where is to save azure package. If you use standard config - output files name will be like this "Standard_{Vm SIze}.cspkg", if you use custom config output file name will be "AzurePackage.cspkg" |
+| **Path to Azure SDK**     | Yes | None | The path to the `cspack.exe` Azure packaging tool. |
+| **Acumatica Version**     | Yes | *2020R1/2019R2* | The version of Acumatica ERP. The value defines which version of NET. Framework must be installed before the start of Acumatica ERP. (The .Net Framework version that corresponds to the selected version of Acumatica ERP is shown in the **.Net Version** box.)|
+| **VM Size**               | Yes if the **Standard Acumatica config** radio button is selected | *Medium* | The size of the virtual machine for which the Azure package will be compiled. If you cannot find the needed size in the list, you can type one of the general purpose virtual machine sizes in the field. Because the **Standard Acumatica config** radio button is selected, the application will use the standard Acumatica config (the `*.csdef` file) for the Azure packages. |
+| **Custom config**         | Yes if the **Custom config** radio button is selected | None | The full path to the `*.csdef` file. If this value is specified, the application does not use `VM Size`. |
+| **Path to source folder** | Yes | None | The path to the folder with unpacked `ErpPackage.zip`. The archive can be downloaded from [builds](http://builds.acumatica.com/). |
+| **Path to output folder** | Yes | None | The path to the folder where the Azure package should be saved. If you use the standard Acumatica config, the name of the output file will have the following format: `Standard_{Vm Size}.cspkg`. If you use a custom config, the output file name will be `AzurePackage.cspkg`. |
 
-Example filled fields
-![Opened UI application - 2](/docs/images/ui2.png "FilledUI")
+The following screenshot shows an example of the values specified in the UI.
+![Opened UI application - 2](docs/images/ui2.png "FilledUI")
 
-After each run application store selected settings in user directory.
+After each run the application saves the selected settings in the user directory.
 
 ### AzureCompiler.Console
 
-Tools for compilation azure package in a build system.
+`AzureCompiler.Console` is a tool for compilation of the Azure package in a build system. You can run the console application with the parameters listed in the following table.
 
 | Input parameter | Required | Description |
 | --------------- | -------- | ----------- |
-| -c, --cspack      | Yes | Path to azure packaging tool cspack.exe |
-| -s, --sourceDir   | Yes | Path to source folder, unpacked ErpPackage.zip |
-| -o, --outDir      | Yes | Path to output folder |
-| -f, --framework   | Yes | Framework version. Avaiable values: NDP48 - for version 2019R2/2020R1, NDP482 - 2019R1 |
-| -v, --vmSize      | Yes, if you use custom config |Vitrual machine size. |
-| -g, --config      | Yes, if you use standard config | Path to your custom config file (*.csdef). |
-| -q, --quiet       | No | (Default: false) Closing window when program is finished |
+| `-c`, `--cspack`      | Yes | The path to the `cspack.exe` Azure packaging tool. |
+| `-s`, `--sourceDir`   | Yes | The path to the folder with unpacked `ErpPackage.zip`. |
+| `-o`, `--outDir`      | Yes | The path to the folder where the Azure package should be saved. |
+| `-f`, `--framework`   | Yes | The version of .NET Framework, which can be one of the following: *NDP48* (for Acumatica ERP 2019 R2 or 2020 R1) or *NDP482* (for Acumatica ERP 2019 R1). |
+| `-v`, `--vmSize`      | Yes if you use a custom config |The vitrual machine size. |
+| `-g`, `--config`      | Yes if you use the standard Acumatica config | The full path to the `*.csdef` file. |
+| `-q`, `--quiet`       | No | The value that indicates (if set to `true`) that the console window should be closed when the execution is completed. The value is `false` by default. |
